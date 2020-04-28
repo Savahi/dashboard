@@ -14,7 +14,9 @@ class AppHeader extends React.Component {
 	render() {
 		return (
 			<div className={styles.container}>
-				<div className={styles.lang}>{ Settings.lang[ this.props.lang] }</div>
+				<div className={styles.lang}>
+					<span onClick={this.props.changeLang}>{ Settings.lang[ this.props.lang] }</span>
+				</div>
 				<div className={styles.title}>{ this.props.title }</div>
 				<div className={styles.user}>{ this.props.userName } :: { Settings.exitText[this.props.lang] }</div>
 			</div>

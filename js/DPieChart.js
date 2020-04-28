@@ -11,20 +11,22 @@ class DPieChart extends React.Component {
 	}
 
 	render() {
+		let stt = this.props.chart.settings;
 		let radius = (this.props.width > this.props.height ) ? (this.props.height * 0.4) : (this.props.width * 0.4);
 
 		let colorMapping = null;
-		let colors = this.props.pieChart.settings.colors;
+		let colors = this.props.chart.settings.colors;
 		if( colors !== undefined && colors !== null ) {
-			colorMapping = this.props.pieChart.data.map((entry, index) => <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />);
+			colorMapping = this.props.chart.data.map((entry, index) => <Cell key={`cell.${stt.id}.${index}`} fill={colors[index % colors.length]} />);
 		}
-		let legend = <Legend />					
+		let legend = <Legend key={'legend.'+stt.id} layout="vertical" align="right" />					
 		let style= { fontSize:'12px', color: '#7f7f7f' };	
 		return (
-			<PieChart style={style} width={this.props.width} height={this.props.height} margin={{ top: 5, right: 15, left: 15, bottom: 30 }}>
+			<PieChart key={'piechart.'+stt.id} style={style} width={this.props.width} height={this.props.height} 
+			 margin={{ top: 5, right: 15, left: 15, bottom: 40 }}>
 				{legend}
-				<Pie data={this.props.pieChart.data} dataKey="value" nameKey="name" cx="50%" cy="50%" 
-				 outerRadius={radius} fill={this.props.pieChart.settings.fill} label>
+				<Pie key={'pie.'+stt.id} data={this.props.chart.data} dataKey="value" nameKey="name" cx="50%" cy="50%" 
+				 outerRadius={radius} fill={this.props.chart.settings.fill} label>
 					{colorMapping}
 				</Pie>
 			</PieChart>
